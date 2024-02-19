@@ -5,6 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const usercontroller_1 = require("../controller/usercontroller");
+const datachecker_1 = require("../validater/datachecker");
 const router = express_1.default.Router();
-router.post("/create", usercontroller_1.userController.createuser);
+router.post("/create", datachecker_1.DataCheckers.userRegistIsEmpty, datachecker_1.DataCheckers.emailExist, usercontroller_1.userController.createuser);
+router.get("/get", usercontroller_1.userController.getusers);
+router.get("/get/:id", usercontroller_1.userController.getOneUsers);
+router.delete("/delete", usercontroller_1.userController.deleteusers);
+router.delete("/delete/:id", usercontroller_1.userController.deleteOneUsers);
+router.patch("/update/:id", datachecker_1.DataCheckers.userRegistIsEmpty, usercontroller_1.userController.updateUsers);
+router.post("/login", datachecker_1.DataCheckers.userRegistIsEmpty, usercontroller_1.userController.Login);
 exports.default = router;

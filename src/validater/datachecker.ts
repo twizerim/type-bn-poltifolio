@@ -13,7 +13,7 @@ class DataCheckers{
             return errormessage(res,401,'please provide your first name')
         }else if(lastname===""){
             return errormessage(res,401,'please provide your last name')
-        }else if(phone===''){
+        }else if(phone==""){
             return errormessage(res,401,'please provide your phone number')
         }else if(email===""){
             return errormessage(res,401,'please provide your email')

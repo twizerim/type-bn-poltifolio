@@ -48,15 +48,15 @@ class userController {
             const { email, password } = req.body;
             const user = yield user_1.User.findOne({ email });
             if (!user) {
-                return (0, errormessage_1.errormessage)(res, 401, 'Invalid email');
+                return (0, errormessage_1.errormessage)(res, 401, 'Invalid email or password');
             }
             else {
                 const comparepassword = bcrypt_1.default.compareSync(password, user.password);
                 if (!comparepassword) {
-                    return (0, errormessage_1.errormessage)(res, 401, "Invalid password");
+                    return (0, errormessage_1.errormessage)(res, 401, "Invalid email or password");
                 }
                 else {
-                    const SCRET_KY = "hgjfhuhjuoih";
+                    const SCRET_KY = "gedeonpro";
                     const token = jsonwebtoken_1.default.sign({ user: user }, SCRET_KY, { expiresIn: "1d" });
                     return (0, tokenmessage_1.tokenmessage)(res, 201, token, user);
                 }

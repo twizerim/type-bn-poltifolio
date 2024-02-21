@@ -36,13 +36,13 @@ class userController{
 
         const user=await User.findOne({email})
         if(!user){
-            return errormessage(res,401,'Invalid email')
+            return errormessage(res,401,'Invalid email or password')
         }else{
             const comparepassword=bcrypt.compareSync(password,user.password)
             if(!comparepassword){
-                return errormessage(res,401,"Invalid password")
+                return errormessage(res,401,"Invalid email or password")
             }else{
-                const SCRET_KY="hgjfhuhjuoih"
+                const SCRET_KY="gedeonpro"
                 const token=jwt.sign({user:user},SCRET_KY,{expiresIn:"1d"})
                 return tokenmessage(res,201,token,user)
             }

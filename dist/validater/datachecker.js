@@ -22,7 +22,7 @@ class DataCheckers {
             else if (lastname === "") {
                 return (0, errormessage_1.errormessage)(res, 401, 'please provide your last name');
             }
-            else if (phone === '') {
+            else if (phone == "") {
                 return (0, errormessage_1.errormessage)(res, 401, 'please provide your phone number');
             }
             else if (email === "") {

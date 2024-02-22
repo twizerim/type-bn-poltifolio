@@ -1,43 +1,59 @@
 "use strict";
-// import { Request, Response, NextFunction } from 'express';
-// import  jwt  from 'jsonwebtoken';
-// import { errormessage } from '../utils/errormessage';
-// interface User {
-//     id: string;
-//     firstname: string;
-//     lastname:string;
-//     email:string;
-//     phone:number;
-//     password:string;
-//     confrimpassword:string
-//     signedAt:string;
-//     role: string[];
-//   }
-//   interface RequestWithUser extends Request {
-//     user?: User;
-//   }
-//   export const authenticateUser = (req: RequestWithUser, res: Response, next: NextFunction): void => {
-//     const token = req.headers["auth-token"]
-//     if(!token){
-//       return errormessage(res,401,`no token provided`)
-//     }else{
-//       const verifyToken = jwt.verify(token,process.env.SCRET_KEY,{expiresIn:"2d"})
-//     // Implement your user authentication logic here
-//     // For example, decode JWT, verify session, etc.
-//     // Set the authenticated user in req.user
-//     // For demonstration purposes, a dummy user is used here
-//     req.user = verifyToken.user;
-//     next();
-//   };
-//  }
-//   export const authorize = (allowedRoles: string[]) => {
-//     return (req: RequestWithUser, res: Response, next: NextFunction): void => {
-//       // Check if the user has any of the allowed roles
-//       const hasPermission = allowedRoles.some((role) => req.user?.role.includes(role));
-//       if (hasPermission) {
-//         next();
-//       } else {
-//         res.status(403).json({ error: 'Access forbidden' });
-//       }
-//     };
-//   };
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const jsonwebtoken_1 = __importStar(require("jsonwebtoken"));
+const errormessage_1 = require("../utils/errormessage");
+const VerifyAccess = (passrole) => {
+    return (req, res, next) => {
+        const token = req.headers["auth-token"];
+        if (!token || Array.isArray(token)) {
+            return (0, errormessage_1.errormessage)(res, 401, `No valid token provided`);
+        }
+        const secretKey = process.env.SCRET_KY;
+        if (!secretKey) {
+            return (0, errormessage_1.errormessage)(res, 500, `Secret key is not defined`);
+        }
+        try {
+            const verifyToken = jsonwebtoken_1.default.verify(token, secretKey);
+            req.user = verifyToken;
+            if (passrole !== verifyToken.user.role) {
+                return (0, errormessage_1.errormessage)(res, 403, `You don't have access`);
+            }
+            else {
+                next();
+            }
+        }
+        catch (error) {
+            if (error instanceof jsonwebtoken_1.TokenExpiredError) {
+                return (0, errormessage_1.errormessage)(res, 401, `Token expired`);
+            }
+            else if (error instanceof jsonwebtoken_1.JsonWebTokenError) {
+                return (0, errormessage_1.errormessage)(res, 401, `Invalid token`);
+            }
+            return (0, errormessage_1.errormessage)(res, 500, `Server Error: ${error.message}`);
+        }
+    };
+};
+exports.default = VerifyAccess;

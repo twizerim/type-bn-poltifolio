@@ -1,12 +1,31 @@
 
-import mongoose from "mongoose";
+import mongoose,{Schema,Document} from "mongoose";
+
+
+export interface IBlog extends Document {
+    id:string;
+    blogName: string;
+    blogTitle: string;
+    blogDescription: string;
+    blogImage: string;
+    likes: string[];
+    dislikes: string[];
+    comments:string[]
+  }
 
 
 const blogschema = new mongoose.Schema({
+    id:{type:String},
     blogTitle:{type:String,required:true},
     blogName:{type:String,required:true},
     blogDiscription:{type:String,required:true},
     blogImage:{type:String,required:true},
+    comments:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Comment"  
+        }
+    ],
     likes:[
         {
             type:mongoose.Schema.Types.ObjectId,
@@ -21,5 +40,4 @@ const blogschema = new mongoose.Schema({
     ],
     postAt:{type:Date,default:new Date(Date.now())}
 })
-const Blogs=mongoose.model("Blogs",blogschema)
-export {Blogs}
+export default mongoose.model<IBlog>('Blogs', blogschema);

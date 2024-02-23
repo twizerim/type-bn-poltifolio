@@ -1,12 +1,13 @@
 
 import express,{Router} from "express"
 import { blogController } from "../controller/blogcontroller"
-// import upload from "../validater/multer"
+import VerifyAccess from "../validater/velifiyAccess"
+import upload from "../validater/multer"
 
 
 const router:Router=express.Router()
-router.post("/post",blogController.postblogs)
-router.get("/get",blogController.getblogs)
+router.post("/post",upload.single("image"),blogController.postblogs)
+router.get("/get",VerifyAccess("user"),blogController.getblogs)
 router.get("/get/:id",blogController.getOneblogs)
 router.delete("/delete",blogController.deleteblogs)
 router.delete("/delete/:id",blogController.deleteOneblogs)

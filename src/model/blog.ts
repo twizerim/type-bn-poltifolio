@@ -18,7 +18,7 @@ const blogschema = new mongoose.Schema({
     id:{type:String},
     blogTitle:{type:String,required:true},
     blogName:{type:String,required:true},
-    blogDiscription:{type:String,required:true},
+    blogDescription:{type:String,required:true},
     blogImage:{type:String,required:true},
     comments:[
         {

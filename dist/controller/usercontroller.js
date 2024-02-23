@@ -58,7 +58,7 @@ class userController {
                 else {
                     const SCRET_KY = "gedeonpro";
                     const token = jsonwebtoken_1.default.sign({ user: user }, SCRET_KY, { expiresIn: "1d" });
-                    return (0, tokenmessage_1.tokenmessage)(res, 201, token, user);
+                    return (0, tokenmessage_1.tokenmessage)(res, 201, token);
                 }
             }
         });

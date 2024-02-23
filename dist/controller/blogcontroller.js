@@ -18,23 +18,24 @@ const errormessage_1 = require("../utils/errormessage");
 const successmessage_1 = require("../utils/successmessage");
 class blogController {
     static postblogs(req, res) {
+        var _a;
         return __awaiter(this, void 0, void 0, function* () {
-            const blog = yield blog_1.default.create(req.body);
-            if (!blog) {
-                return (0, errormessage_1.errormessage)(res, 401, 'no blog posted');
-            }
-            else {
-                return (0, successmessage_1.successmessage)(res, 201, 'blog posted', blog);
-            }
-            // try {
-            //     const { blogName, blogTitle, blogDescription }: IBlog = req.body;
-            //     const blogImage = req.file?.path || ""
-            //     const newBlog: IBlog = new Blogs({ blogName, blogTitle, blogDescription, blogImage });
-            //     const savedBlog: IBlog = await newBlog.save();
-            //     return successmessage(res,201,'blog successfuly posted',savedBlog)
-            // } catch (error) {
-            //     console.log(error)
+            // const blog = await Blogs.create(req.body)
+            // if(!blog){
+            //     return errormessage(res,401,'no blog posted')
+            // }else{
+            //     return successmessage(res,201,'blog posted',blog)
             // }
+            try {
+                const { blogName, blogTitle, blogDescription } = req.body;
+                const blogImage = ((_a = req.file) === null || _a === void 0 ? void 0 : _a.path) || "";
+                const newBlog = new blog_1.default({ blogName, blogTitle, blogDescription, blogImage });
+                const savedBlog = yield newBlog.save();
+                return (0, successmessage_1.successmessage)(res, 201, 'blog successfuly posted', savedBlog);
+            }
+            catch (error) {
+                console.log(error);
+            }
         });
     }
     static getblogs(req, res) {
@@ -145,7 +146,6 @@ class blogController {
                 }
             }
             catch (error) {
-                // Handle any unexpected errors
                 console.error(error);
                 return (0, errormessage_1.errormessage)(res, 500, 'Internal Server Error');
             }

@@ -44,7 +44,7 @@ class userController{
             }else{
                 const SCRET_KY="gedeonpro"
                 const token=jwt.sign({user:user},SCRET_KY,{expiresIn:"1d"})
-                return tokenmessage(res,201,token,user)
+                return tokenmessage(res,201,token)
             }
         }
     }

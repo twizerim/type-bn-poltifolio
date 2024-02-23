@@ -11,24 +11,24 @@ class blogController{
     public static async postblogs(req:Request,res:Response):Promise<void>{
 
 
-        const blog = await Blogs.create(req.body)
-        if(!blog){
-            return errormessage(res,401,'no blog posted')
-        }else{
-            return successmessage(res,201,'blog posted',blog)
-        }
-        // try {
-
-        //     const { blogName, blogTitle, blogDescription }: IBlog = req.body;
-        //     const blogImage = req.file?.path || ""
-
-        //     const newBlog: IBlog = new Blogs({ blogName, blogTitle, blogDescription, blogImage });
-        //     const savedBlog: IBlog = await newBlog.save();
-        //     return successmessage(res,201,'blog successfuly posted',savedBlog)
-            
-        // } catch (error) {
-        //     console.log(error)
+        // const blog = await Blogs.create(req.body)
+        // if(!blog){
+        //     return errormessage(res,401,'no blog posted')
+        // }else{
+        //     return successmessage(res,201,'blog posted',blog)
         // }
+        try {
+
+            const { blogName, blogTitle, blogDescription }: IBlog = req.body;
+            const blogImage = req.file?.path || ""
+
+            const newBlog: IBlog = new Blogs({ blogName, blogTitle, blogDescription, blogImage });
+            const savedBlog: IBlog = await newBlog.save();
+            return successmessage(res,201,'blog successfuly posted',savedBlog)
+            
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     public static async getblogs(req:Request,res:Response):Promise<void>{
@@ -122,7 +122,6 @@ public static async likes(req: Request, res: Response): Promise<void> {
             }
         }
     } catch (error) {
-        // Handle any unexpected errors
         console.error(error);
         return errormessage(res, 500, 'Internal Server Error');
     }

@@ -3,6 +3,7 @@ import express,{Router} from "express"
 import { userController } from "../controller/usercontroller"
 import { DataCheckers } from "../validater/datachecker"
 import { Validation } from "../validater/validation"
+import VerifyAccess from "../validater/velifiyAccess"
 
 
 
@@ -11,9 +12,9 @@ router.post("/create",DataCheckers.userRegistIsEmpty,DataCheckers.emailExist,Val
 Validation.inputValidator,userController.createuser)
 router.get("/get",userController.getusers)
 router.get("/get/:id",userController.getOneUsers)
-router.delete("/delete",userController.deleteusers)
-router.delete("/delete/:id",userController.deleteOneUsers)
-router.patch("/update/:id",DataCheckers.userRegistIsEmpty,userController.updateUsers)
+router.delete("/delete",VerifyAccess("admin"),userController.deleteusers)
+router.delete("/delete/:id",VerifyAccess("admin"),userController.deleteOneUsers)
+router.patch("/update/:id",VerifyAccess("admin"),DataCheckers.userRegistIsEmpty,userController.updateUsers)
 router.post("/login",DataCheckers.userRegistIsEmpty,userController.Login)
 
 

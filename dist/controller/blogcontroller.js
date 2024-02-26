@@ -20,12 +20,6 @@ class blogController {
     static postblogs(req, res) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
-            // const blog = await Blogs.create(req.body)
-            // if(!blog){
-            //     return errormessage(res,401,'no blog posted')
-            // }else{
-            //     return successmessage(res,201,'blog posted',blog)
-            // }
             try {
                 const { blogName, blogTitle, blogDescription } = req.body;
                 const blogImage = ((_a = req.file) === null || _a === void 0 ? void 0 : _a.path) || "";

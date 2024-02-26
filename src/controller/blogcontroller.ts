@@ -10,13 +10,6 @@ import { successmessage } from "../utils/successmessage"
 class blogController{
     public static async postblogs(req:Request,res:Response):Promise<void>{
 
-
-        // const blog = await Blogs.create(req.body)
-        // if(!blog){
-        //     return errormessage(res,401,'no blog posted')
-        // }else{
-        //     return successmessage(res,201,'blog posted',blog)
-        // }
         try {
 
             const { blogName, blogTitle, blogDescription }: IBlog = req.body;

@@ -29,12 +29,5 @@ const CommentSchema = new mongoose_1.Schema({
     comment: { type: String, required: true },
     postAt: { type: Date, default: new Date(Date.now()) }
 });
-CommentSchema.pre(/^find/, function (next) {
-    this.populate({
-        path: 'user',
-        select: 'firstname lastname email',
-    });
-    next();
-});
 const Comment = (0, mongoose_1.model)('Comment', CommentSchema);
 exports.default = Comment;

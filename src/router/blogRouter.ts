@@ -8,11 +8,11 @@ import upload from "../validater/multer"
 const router:Router=express.Router()
 router.post("/post",upload.single("image"),blogController.postblogs)
 router.get("/get",VerifyAccess("user"),blogController.getblogs)
-router.get("/get/:id",blogController.getOneblogs)
-router.delete("/delete",blogController.deleteblogs)
-router.delete("/delete/:id",blogController.deleteOneblogs)
-router.patch("/update/:id",blogController.updateblogs)
-router.put("/like/:blogId",blogController.likes)
-router.put("/dislikes/:blogId",blogController.dislikes)
+router.get("/get/:id",VerifyAccess("user"),blogController.getOneblogs)
+router.delete("/delete",VerifyAccess("admin"),blogController.deleteblogs)
+router.delete("/delete/:id",VerifyAccess("admin"),blogController.deleteOneblogs)
+router.patch("/update/:id",VerifyAccess("admin"),blogController.updateblogs)
+router.put("/like/:blogId",VerifyAccess("user"),blogController.likes)
+router.put("/dislikes/:blogId",VerifyAccess("user"),blogController.dislikes)
 
 export default router

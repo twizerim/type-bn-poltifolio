@@ -3,6 +3,10 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import router from "./router";
+import swaggerUi from "swagger-ui-express";
+import swaggerOutput from "./documatation/swagger_output.json";
+
+
 
 
 dotenv.config();
@@ -11,6 +15,7 @@ const andela = express();
 
 andela.use(bodyParser.json());
 andela.use("/Jant", router);
+andela.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerOutput));
 
 const portas = parseInt(process.env.PORT || "3000", 10);
 const db = process.env.DATABASE || "mongodb+srv://gedeonprogrammer:programmer12@cluster0.8sikbdc.mongodb.net/Andela-poltifolio";

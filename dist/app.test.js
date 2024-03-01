@@ -8,21 +8,111 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const mongoose = require("mongoose");
-const request = require("supertest");
-const app = require("../src/index");
-require("dotenv").config();
-beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield mongoose.connect(process.env.MONGODB_URI);
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const server_1 = __importDefault(require("./server"));
+const supertest_1 = __importDefault(require("supertest"));
+const mongoose_1 = __importDefault(require("mongoose"));
+// describe("api endPoint",()=>{
+// let token : string;
+// let brandId : number;
+beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
+    mongoose_1.default.connect("mongodb+srv://gedeonprogrammer:programmer12@cluster0.8sikbdc.mongodb.net/Andela-poltifolio");
 }));
-/* Closing database connection after each test. */
-afterEach(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield mongoose.connection.close();
+afterAll(() => __awaiter(void 0, void 0, void 0, function* () {
+    yield mongoose_1.default.connection.close();
 }));
-describe("GET /api/users", () => {
-    it("should return all users", () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield request(app).get("/Jant/user/get");
-        expect(res.statusCode).toBe(200);
-        expect(res.body.length).toBeGreaterThan(0);
+describe("App testing", () => {
+    it("Should return success", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield (0, supertest_1.default)(server_1.default).get("/");
+        expect(res.status).toEqual(200);
     }));
+});
+describe("user testing", () => {
+    it("Should create a user and return success", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield (0, supertest_1.default)(server_1.default)
+            .post("/create")
+            .send({
+            firstname: "TWAGIRA",
+            lastname: "Goodu",
+            email: "twagira@gmail.com",
+            phone: "250733117441",
+            password: "Diane@123",
+            confrimpassword: "Diane@123"
+        });
+        expect(res.status).toEqual(201);
+    }));
+    // it("Should return that the user successfully logged in", async () => {
+    //        const res = await request(app)
+    //        .post("/login")
+    //        .send({
+    //          email: "geden@gmail.com",
+    //          password: "Gedeon@12",
+    //        })
+    //        expect(res.status).toEqual(201);
+    // });
+    //     it("Should return that the user found", async () => {
+    //            const res = await request(app)
+    //            .get("/")
+    //            expect(res.status).toEqual(200);
+    // });
+    //     it("Should return that all users found", async () => {
+    //           const res = await request(app)
+    //           .get("/")
+    //           expect(res.status).toEqual(200);
+    // });
+    //     it("Should return that the user deleted", async () => {
+    //           const res = await request(app)
+    //           .delete("/")
+    //           expect(res.status).toEqual(401);
+    // });
+    //     it("Should return that all users deleted", async () => {
+    //           const res = await request(app)
+    //           .delete("/delete")
+    //           expect(res.status).toEqual(401);
+    // });
+    //     it("Should return that the user updated successfully", async () => {
+    //           const res = await request(app)
+    //           .patch("/")
+    //           expect(res.status).toEqual(401);
+    // });
+    // });
+    // describe("blog testing", () =>{
+    //   it("Should create a blog and return success", async () => {
+    //          const res = await request(app)
+    //          .post("/create")
+    //          .send({
+    //           blogTitle:"diane",
+    //           blogDescription: "life story",
+    //           blogImage:"word.jpg",
+    //          })
+    //          expect(res.status).toEqual(400);
+    //        });
+    //       it("Should return that the blog found", async () => {
+    //              const res = await request(app)
+    //              .get("/")
+    //              expect(res.status).toEqual(200);
+    //   });
+    //       it("Should return that all blogs found", async () => {
+    //             const res = await request(app)
+    //             .get("/get")
+    //             expect(res.status).toEqual(200);
+    //   });
+    //       it("Should return that the user deleted", async () => {
+    //             const res = await request(app)
+    //             .delete("/")
+    //             expect(res.status).toEqual(401);
+    //   });
+    //       it("Should return that  all blog deleted", async () => {
+    //             const res = await request(app)
+    //             .delete("/delete")
+    //             expect(res.status).toEqual(401);
+    //   });
+    //       it("Should return that the blog updated successfully", async () => {
+    //             const res = await request(app)
+    //             .patch("/")
+    //             expect(res.status).toEqual(401);
+    //   });
 });

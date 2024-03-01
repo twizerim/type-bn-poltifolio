@@ -12,4 +12,4 @@ router.use("/blogs",blogRouter)
 router.use("/comment",commentRouter)
 
 
-export default router
+export  default router

@@ -7,7 +7,7 @@ import upload from "../validater/multer"
 
 const router:Router=express.Router()
 router.post("/post",upload.single("image"),blogController.postblogs)
-router.get("/get",VerifyAccess("user"),blogController.getblogs)
+router.get("/get",blogController.getblogs)
 router.get("/get/:id",VerifyAccess("user"),blogController.getOneblogs)
 router.delete("/delete",VerifyAccess("admin"),blogController.deleteblogs)
 router.delete("/delete/:id",VerifyAccess("admin"),blogController.deleteOneblogs)

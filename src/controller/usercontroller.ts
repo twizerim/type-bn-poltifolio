@@ -5,7 +5,7 @@ import { errormessage } from '../utils/errormessage'
 import { successmessage } from '../utils/successmessage'
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
-import { tokenmessage } from '../utils/tokenmessage'
+// import { tokenmessage } from '../utils/tokenmessage'
 
 
 
@@ -44,7 +44,12 @@ class userController{
             }else{
                 const SCRET_KY="gedeonpro"
                 const token=jwt.sign({user:user},SCRET_KY,{expiresIn:"1d"})
-                return tokenmessage(res,201,token)
+               res.status(201).json({
+                     token:token,
+                     data:{
+                        user:user
+                     }
+                })
             }
         }
     }

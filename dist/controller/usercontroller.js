@@ -18,7 +18,7 @@ const errormessage_1 = require("../utils/errormessage");
 const successmessage_1 = require("../utils/successmessage");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const tokenmessage_1 = require("../utils/tokenmessage");
+// import { tokenmessage } from '../utils/tokenmessage'
 class userController {
     static createuser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -58,7 +58,12 @@ class userController {
                 else {
                     const SCRET_KY = "gedeonpro";
                     const token = jsonwebtoken_1.default.sign({ user: user }, SCRET_KY, { expiresIn: "1d" });
-                    return (0, tokenmessage_1.tokenmessage)(res, 201, token);
+                    res.status(201).json({
+                        token: token,
+                        data: {
+                            user: user
+                        }
+                    });
                 }
             }
         });

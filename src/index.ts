@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import router from "./router";
 import swaggerUi from "swagger-ui-express";
 import swaggerOutput from "./documatation/swagger_output.json";
+import cors from "cors"
 
 
 
@@ -14,6 +15,7 @@ dotenv.config();
 const andela = express();
 
 andela.use(bodyParser.json());
+andela.use(cors())
 andela.use("/Jant", router);
 andela.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerOutput));
 

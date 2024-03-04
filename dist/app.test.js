@@ -44,35 +44,35 @@ describe("user testing", () => {
         });
         expect(res.status).toEqual(201);
     }));
-    // it("Should return that the user successfully logged in", async () => {
-    //        const res = await request(app)
-    //        .post("/login")
-    //        .send({
-    //          email: "geden@gmail.com",
-    //          password: "Gedeon@12",
-    //        })
-    //        expect(res.status).toEqual(201);
-    // });
-    //     it("Should return that the user found", async () => {
-    //            const res = await request(app)
-    //            .get("/")
-    //            expect(res.status).toEqual(200);
-    // });
-    //     it("Should return that all users found", async () => {
-    //           const res = await request(app)
-    //           .get("/")
-    //           expect(res.status).toEqual(200);
-    // });
-    //     it("Should return that the user deleted", async () => {
-    //           const res = await request(app)
-    //           .delete("/")
-    //           expect(res.status).toEqual(401);
-    // });
-    //     it("Should return that all users deleted", async () => {
-    //           const res = await request(app)
-    //           .delete("/delete")
-    //           expect(res.status).toEqual(401);
-    // });
+    it("Should return that the user successfully logged in", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield (0, supertest_1.default)(server_1.default)
+            .post("/login")
+            .send({
+            email: "geden@gmail.com",
+            password: "Gedeon@12",
+        });
+        expect(res.status).toEqual(201);
+    }));
+    it("Should return that the user found", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield (0, supertest_1.default)(server_1.default)
+            .get("/");
+        expect(res.status).toEqual(200);
+    }));
+    it("Should return that all users found", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield (0, supertest_1.default)(server_1.default)
+            .get("/");
+        expect(res.status).toEqual(200);
+    }));
+    it("Should return that the user deleted", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield (0, supertest_1.default)(server_1.default)
+            .delete("/");
+        expect(res.status).toEqual(401);
+    }));
+    it("Should return that all users deleted", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield (0, supertest_1.default)(server_1.default)
+            .delete("/delete");
+        expect(res.status).toEqual(401);
+    }));
     //     it("Should return that the user updated successfully", async () => {
     //           const res = await request(app)
     //           .patch("/")

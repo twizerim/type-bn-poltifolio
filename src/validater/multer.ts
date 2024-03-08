@@ -2,15 +2,15 @@
 import multer from 'multer';
 import path from 'path';
 
-// Multer storage configuration
+
 const storage = multer.diskStorage({
-  destination: 'uploads/', // specify the folder where images will be stored
+  destination: 'uploads/', 
   filename: (req, file, cb) => {
     cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
   },
 });
 
-// Multer file filter
+
 const fileFilter = (req: Express.Request, file: Express.Multer.File, cb: any) => {
   if (file.mimetype.startsWith('image/')) {
     cb(null, true);
@@ -19,7 +19,6 @@ const fileFilter = (req: Express.Request, file: Express.Multer.File, cb: any) =>
   }
 };
 
-// Multer configuration
 const upload = multer({ storage,fileFilter });
 
 export default upload;

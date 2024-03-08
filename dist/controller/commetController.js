@@ -23,7 +23,7 @@ class commentcontroller {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const blogId = req.params.blogId;
-                req.body.user = (_a = req.user) === null || _a === void 0 ? void 0 : _a.user;
+                req.body.user = (_a = req.user) === null || _a === void 0 ? void 0 : _a.user.id;
                 const comment = yield comment_1.default.create(req.body);
                 const blog = yield blog_1.default.findByIdAndUpdate(blogId, { $push: { comments: comment } }, { new: true });
                 if (!blog) {

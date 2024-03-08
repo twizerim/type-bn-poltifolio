@@ -1,12 +1,27 @@
-import mongoose, { Schema, Document, model } from 'mongoose';
+import mongoose, { Schema, Document,PopulatedDoc, model } from 'mongoose';
+
+interface User {
+    _id: string;
+    firstName: string;
+}
 interface IComment extends Document {
-    user: string;
+    user: PopulatedDoc<User & Document>;
 }
 
 const CommentSchema = new Schema({
-    commeterName:{type:String,required:true},
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    },
     comment:{type:String,required:true},
     postAt:{type:Date,default:new Date(Date.now())}
+})
+CommentSchema.pre<IComment>(/^find/,function(next){
+    this.populate({
+        path:"user",
+        select:"firstName "
+    })
+    next()
 })
 const Comment = model<IComment>('Comment', CommentSchema);
 

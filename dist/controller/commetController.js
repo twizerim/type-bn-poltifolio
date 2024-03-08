@@ -22,13 +22,14 @@ class commentcontroller {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const blogId = req.params.blogId;
+                req.body.user = req.user;
                 const comment = yield comment_1.default.create(req.body);
                 const blog = yield blog_1.default.findByIdAndUpdate(blogId, { $push: { comments: comment } }, { new: true });
                 if (!blog) {
                     return (0, errormessage_1.errormessage)(res, 401, `no blog found on this id ${blogId}`);
                 }
                 else {
-                    return (0, successmessage_1.successmessage)(res, 201, 'comment successfuly posted', comment);
+                    return (0, successmessage_1.successmessage)(res, 201, 'comment successfuly posted', blog);
                 }
             }
             catch (error) {

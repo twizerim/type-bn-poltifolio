@@ -10,7 +10,6 @@ class commentcontroller{
     public static async postcomment(req:Request,res:Response):Promise<void>{
           try {
             const blogId=req.params.blogId
-            req.body.user=req.user?.user.id
             const comment = await Comment.create(req.body)
             const blog = await Blogs.findByIdAndUpdate(blogId,{$push:{comments:comment}},{new:true})
             if(!blog){

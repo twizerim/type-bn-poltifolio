@@ -4,7 +4,7 @@ interface IComment extends Document {
 }
 
 const CommentSchema = new Schema({
-    user:{type:mongoose.Schema.Types.ObjectId,ref:"User"},
+    commeterName:{type:String,required:true},
     comment:{type:String,required:true},
     postAt:{type:Date,default:new Date(Date.now())}
 })

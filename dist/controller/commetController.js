@@ -24,7 +24,7 @@ class commentcontroller {
             try {
                 const blogId = req.params.blogId;
                 req.body.user = (_a = req.user) === null || _a === void 0 ? void 0 : _a.user.id;
-                const comment = yield comment_1.default.create(req.body);
+                const comment = yield comment_1.default.create(req.body.user);
                 const blog = yield blog_1.default.findByIdAndUpdate(blogId, { $push: { comments: comment } }, { new: true });
                 if (!blog) {
                     return (0, errormessage_1.errormessage)(res, 401, `no blog found on this id ${blogId}`);

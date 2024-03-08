@@ -8,7 +8,7 @@ const blogcontroller_1 = require("../controller/blogcontroller");
 const velifiyAccess_1 = __importDefault(require("../validater/velifiyAccess"));
 const multer_1 = __importDefault(require("../validater/multer"));
 const router = express_1.default.Router();
-router.post("/post", multer_1.default.single("image"), blogcontroller_1.blogController.postblogs);
+router.post("/post", multer_1.default.single("image"), (0, velifiyAccess_1.default)("admin"), blogcontroller_1.blogController.postblogs);
 router.get("/get", blogcontroller_1.blogController.getblogs);
 router.get("/get/:id", (0, velifiyAccess_1.default)("user"), blogcontroller_1.blogController.getOneblogs);
 router.delete("/delete", (0, velifiyAccess_1.default)("admin"), blogcontroller_1.blogController.deleteblogs);

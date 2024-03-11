@@ -29,6 +29,7 @@ const CommentSchema = new mongoose_1.Schema({
         type: mongoose_1.default.Schema.Types.ObjectId,
         ref: "User"
     },
+    names: { type: String, required: true },
     comment: { type: String, required: true },
     postAt: { type: Date, default: new Date(Date.now()) }
 });

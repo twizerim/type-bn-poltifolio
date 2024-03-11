@@ -19,8 +19,8 @@ const errormessage_1 = require("../utils/errormessage");
 const successmessage_1 = require("../utils/successmessage");
 class commentcontroller {
     static postcomment(req, res) {
-        var _a;
         return __awaiter(this, void 0, void 0, function* () {
+            var _a;
             try {
                 const blogId = req.params.blogId;
                 req.body.user = (_a = req.user) === null || _a === void 0 ? void 0 : _a.user.id;

@@ -18,8 +18,8 @@ const errormessage_1 = require("../utils/errormessage");
 const successmessage_1 = require("../utils/successmessage");
 class blogController {
     static postblogs(req, res) {
-        var _a;
         return __awaiter(this, void 0, void 0, function* () {
+            var _a;
             try {
                 const { blogName, blogTitle, blogDescription } = req.body;
                 const blogImage = ((_a = req.file) === null || _a === void 0 ? void 0 : _a.path) || "";
@@ -91,8 +91,8 @@ class blogController {
         });
     }
     static likes(req, res) {
-        var _a;
         return __awaiter(this, void 0, void 0, function* () {
+            var _a;
             try {
                 const blogId = req.params.blogId;
                 const blog = yield blog_1.default.findById(blogId);
@@ -119,8 +119,8 @@ class blogController {
         });
     }
     static dislikes(req, res) {
-        var _a;
         return __awaiter(this, void 0, void 0, function* () {
+            var _a;
             try {
                 const blogId = req.params.blogId;
                 const blog = yield blog_1.default.findById(blogId);

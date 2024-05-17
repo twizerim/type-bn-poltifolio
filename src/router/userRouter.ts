@@ -12,7 +12,7 @@ router.post("/create",DataCheckers.userRegistIsEmpty,DataCheckers.emailExist,Val
 Validation.inputValidator,userController.createuser)
 router.get("/get",userController.getusers)
 router.get("/get/:id",userController.getOneUsers)
-router.delete("/delete",VerifyAccess("admin"),userController.deleteusers)
+router.delete("/delete",userController.deleteusers)
 router.delete("/delete/:id",VerifyAccess("admin"),userController.deleteOneUsers)
 router.patch("/update/:id",VerifyAccess("admin"),DataCheckers.userRegistIsEmpty,userController.updateUsers)
 router.post("/login",DataCheckers.userRegistIsEmpty,userController.Login)

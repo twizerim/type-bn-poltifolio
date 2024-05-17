@@ -8,6 +8,7 @@ router.get("/",commentcontroller.getcomment)
 router.get("/:id",VerifyAccess("admin"),commentcontroller.getonecomment)
 router.delete("/",VerifyAccess("admin"),commentcontroller.deletecomment)
 router.delete("/:id",VerifyAccess("admin"),commentcontroller.deleteoncommet)
+router.get("/:blogID",VerifyAccess("user"),commentcontroller.getcommentbyBlog)
 
 
 export default router

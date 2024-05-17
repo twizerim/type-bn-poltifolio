@@ -17,11 +17,8 @@ class Validation {
     }
     static userAccountRule() {
         return [
-            (0, express_validator_1.check)("firstname", "please correct your name").isAlpha().isUppercase(),
-            (0, express_validator_1.check)("lastname", "please correct your name").isAlpha(),
+            (0, express_validator_1.check)("fullname", "please correct your name").isString(),
             (0, express_validator_1.check)("email", "please correct your user name").isEmail(),
-            (0, express_validator_1.check)('phone', 'Invalid mobile number')
-                .isMobilePhone('any', { strictMode: true }),
             (0, express_validator_1.check)("password", "please correct your strong password").isStrongPassword()
         ];
     }

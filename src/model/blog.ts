@@ -1,5 +1,16 @@
 
-import mongoose,{Schema,Document} from "mongoose";
+import mongoose,{Schema,PopulatedDoc,Document} from "mongoose";
+
+interface Comment {
+    _id: string;
+    names: string;
+    comment:string;
+    postAt:Date
+
+}
+interface IComment extends Document {
+    comment: PopulatedDoc<Comment & Document>;
+}
 
 
 export interface IBlog extends Document {
@@ -39,5 +50,12 @@ const blogschema = new mongoose.Schema({
         }
     ],
     postAt:{type:Date,default:new Date(Date.now())}
+})
+blogschema.pre<IComment>(/^find/,function(next){
+    this.populate({
+        path:"comments",
+        select:"names comment postAt"
+    })
+    next()
 })
 export default mongoose.model<IBlog>('Blogs', blogschema);

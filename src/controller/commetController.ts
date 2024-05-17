@@ -33,6 +33,21 @@ class commentcontroller{
             return successmessage(res,201,'comments retrived',comment)
         }
     }
+
+    public static async getcommentbyBlog(req:Request,res:Response):Promise<void>{
+        const blogID=req.params.blogID
+        const blog=await Blogs.findById(blogID)
+        if(!blog){
+            return errormessage(res,401,'no blog found')
+        }else{
+            const comment=await Comment.find()
+            if(!comment){
+                return errormessage(res,401,'no comment found')
+            }else{
+                return successmessage(res,201,'comment success retrived',comment)
+            }
+        }
+    }
     public static async deletecomment(req:Request,res:Response):Promise<void>{
         const comment = await Comment.deleteMany()
         if(!comment){

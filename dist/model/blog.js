@@ -30,4 +30,11 @@ const blogschema = new mongoose_1.default.Schema({
     ],
     postAt: { type: Date, default: new Date(Date.now()) }
 });
+blogschema.pre(/^find/, function (next) {
+    this.populate({
+        path: "comments",
+        select: "names comment postAt"
+    });
+    next();
+});
 exports.default = mongoose_1.default.model('Blogs', blogschema);

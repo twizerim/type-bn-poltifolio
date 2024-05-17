@@ -18,7 +18,7 @@ andela.use((0, cors_1.default)());
 andela.use("/Jant", router_1.default);
 andela.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_output_json_1.default));
 const portas = parseInt(process.env.PORT || "3000", 10);
-const db = process.env.DATABASE || "mongodb+srv://gedeonprogrammer:programmer12@cluster0.8sikbdc.mongodb.net/Andela-poltifolio";
+const db = process.env.DATABASE || "";
 mongoose_1.default.connect(db)
     .then(() => {
     console.log("Database successfully connected.....");

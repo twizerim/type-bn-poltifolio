@@ -12,4 +12,5 @@ router.get("/", commetController_1.commentcontroller.getcomment);
 router.get("/:id", (0, velifiyAccess_1.default)("admin"), commetController_1.commentcontroller.getonecomment);
 router.delete("/", (0, velifiyAccess_1.default)("admin"), commetController_1.commentcontroller.deletecomment);
 router.delete("/:id", (0, velifiyAccess_1.default)("admin"), commetController_1.commentcontroller.deleteoncommet);
+router.get("/:blogID", (0, velifiyAccess_1.default)("user"), commetController_1.commentcontroller.getcommentbyBlog);
 exports.default = router;

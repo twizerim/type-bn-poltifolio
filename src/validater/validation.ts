@@ -18,11 +18,8 @@ class Validation {
 
   public static userAccountRule(){
      return [
-        check("firstname","please correct your name").isAlpha().isUppercase(),
-        check("lastname","please correct your name").isAlpha(),
+        check("fullname","please correct your name").isString(),
         check("email","please correct your user name").isEmail(),
-        check('phone','Invalid mobile number')
-           .isMobilePhone('any', { strictMode: true }),
         check("password","please correct your strong password").isStrongPassword()
         
           

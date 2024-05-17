@@ -7,14 +7,10 @@ import { errormessage } from "../utils/errormessage"
 class DataCheckers{
 
     public static async userRegistIsEmpty(req:Request,res:Response,next:NextFunction):Promise<void>{
-        const {firstname,lastname,phone,email,password,confrimpassword,message}=req.body
+        const {fullname,email,password,confrimpassword,message}=req.body
 
-        if(firstname===""){
-            return errormessage(res,401,'please provide your first name')
-        }else if(lastname===""){
-            return errormessage(res,401,'please provide your last name')
-        }else if(phone==""){
-            return errormessage(res,401,'please provide your phone number')
+        if(fullname===""){
+            return errormessage(res,401,'please provide your fullname name')
         }else if(email===""){
             return errormessage(res,401,'please provide your email')
         }else if(password===""){

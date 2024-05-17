@@ -11,14 +11,15 @@ import jwt from "jsonwebtoken"
 
 class userController{
     public static async createuser(req:Request,res:Response):Promise<void>{
-        const {firstname,lastname,phone,email,password,confrimpassword,role}=req.body
+        const {fullname,email,password,confrimpassword,role}=req.body
            if(req.body.password !== req.body.confrimpassword){
               return errormessage(res,401," please password and confrim password miss macth")
            }else{
                const hashpassword=bcrypt.hashSync(req.body.password,10)
+               const hashconfrim=bcrypt.hashSync(req.body.password,10)
 
                try {
-                const user = await User.create({firstname,lastname,phone,email,password:hashpassword,confrimpassword,role})
+                const user = await User.create({fullname,email,password:hashpassword,confrimpassword:hashconfrim,role})
                 if(!user){
                    return errormessage(res,401,"no user found")
                 }else{

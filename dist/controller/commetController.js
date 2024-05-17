@@ -49,6 +49,24 @@ class commentcontroller {
             }
         });
     }
+    static getcommentbyBlog(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const blogID = req.params.blogID;
+            const blog = yield blog_1.default.findById(blogID);
+            if (!blog) {
+                return (0, errormessage_1.errormessage)(res, 401, 'no blog found');
+            }
+            else {
+                const comment = yield comment_1.default.find();
+                if (!comment) {
+                    return (0, errormessage_1.errormessage)(res, 401, 'no comment found');
+                }
+                else {
+                    return (0, successmessage_1.successmessage)(res, 201, 'comment success retrived', comment);
+                }
+            }
+        });
+    }
     static deletecomment(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const comment = yield comment_1.default.deleteMany();

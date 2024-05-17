@@ -12,7 +12,7 @@ const router = express_1.default.Router();
 router.post("/create", datachecker_1.DataCheckers.userRegistIsEmpty, datachecker_1.DataCheckers.emailExist, validation_1.Validation.userAccountRule(), validation_1.Validation.inputValidator, usercontroller_1.userController.createuser);
 router.get("/get", usercontroller_1.userController.getusers);
 router.get("/get/:id", usercontroller_1.userController.getOneUsers);
-router.delete("/delete", (0, velifiyAccess_1.default)("admin"), usercontroller_1.userController.deleteusers);
+router.delete("/delete", usercontroller_1.userController.deleteusers);
 router.delete("/delete/:id", (0, velifiyAccess_1.default)("admin"), usercontroller_1.userController.deleteOneUsers);
 router.patch("/update/:id", (0, velifiyAccess_1.default)("admin"), datachecker_1.DataCheckers.userRegistIsEmpty, usercontroller_1.userController.updateUsers);
 router.post("/login", datachecker_1.DataCheckers.userRegistIsEmpty, usercontroller_1.userController.Login);

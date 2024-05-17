@@ -15,15 +15,9 @@ const errormessage_1 = require("../utils/errormessage");
 class DataCheckers {
     static userRegistIsEmpty(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { firstname, lastname, phone, email, password, confrimpassword, message } = req.body;
-            if (firstname === "") {
-                return (0, errormessage_1.errormessage)(res, 401, 'please provide your first name');
-            }
-            else if (lastname === "") {
-                return (0, errormessage_1.errormessage)(res, 401, 'please provide your last name');
-            }
-            else if (phone == "") {
-                return (0, errormessage_1.errormessage)(res, 401, 'please provide your phone number');
+            const { fullname, email, password, confrimpassword, message } = req.body;
+            if (fullname === "") {
+                return (0, errormessage_1.errormessage)(res, 401, 'please provide your fullname name');
             }
             else if (email === "") {
                 return (0, errormessage_1.errormessage)(res, 401, 'please provide your email');

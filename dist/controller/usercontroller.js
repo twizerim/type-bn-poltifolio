@@ -22,14 +22,15 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 class userController {
     static createuser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { firstname, lastname, phone, email, password, confrimpassword, role } = req.body;
+            const { fullname, email, password, confrimpassword, role } = req.body;
             if (req.body.password !== req.body.confrimpassword) {
                 return (0, errormessage_1.errormessage)(res, 401, " please password and confrim password miss macth");
             }
             else {
                 const hashpassword = bcrypt_1.default.hashSync(req.body.password, 10);
+                const hashconfrim = bcrypt_1.default.hashSync(req.body.password, 10);
                 try {
-                    const user = yield user_1.User.create({ firstname, lastname, phone, email, password: hashpassword, confrimpassword, role });
+                    const user = yield user_1.User.create({ fullname, email, password: hashpassword, confrimpassword: hashconfrim, role });
                     if (!user) {
                         return (0, errormessage_1.errormessage)(res, 401, "no user found");
                     }

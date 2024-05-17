@@ -6,9 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Contact = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const contactschema = new mongoose_1.default.Schema({
-    names: { type: String, required: true },
+    fullname: { type: String, required: true },
     email: { type: String, required: true },
-    phone: { type: String, required: true },
     message: { type: String, required: true },
     sendAt: { type: Date, default: new Date(Date.now()) }
 });

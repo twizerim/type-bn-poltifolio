@@ -9,7 +9,7 @@ import cors from "cors";
 
 const app = express();
 
-// Middleware
+
 app.use(cors({
     credentials: true,
 }));
@@ -17,14 +17,14 @@ app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-// Routes
+
 app.get("/", (req: Request, res: Response) => {
     res.status(200).send({ message: "Welcome to our first API" });
 });
 
 app.post("/", userController.createuser);
 app.post("/login", userController.Login);
-app.get("/", userController.getusers); // This route conflicts with the previous one, consider using a different path
+app.get("/", userController.getusers); 
 app.get("/:id", userController.getOneUsers);
 app.delete("/:id", userController.deleteOneUsers);
 

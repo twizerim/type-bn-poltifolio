@@ -16,7 +16,10 @@ interface IComment extends Document {
 export interface Iimage extends Document {
     id:string;
     category:string;
-    image: string;
+    image: {
+        public_id: string;
+        url: string;
+    };
     likes: string[];
     dislikes: string[];
     comments:string[]
@@ -26,7 +29,10 @@ export interface Iimage extends Document {
 const imagechema = new mongoose.Schema({
     id:{type:String},
     category:{type:String,required:true},
-    image:{type:String,required:true},
+    image: {
+        public_id: { type: String, required: true },
+        url: { type: String, required: true }
+    },
     comments:[
         {
             type:mongoose.Schema.Types.ObjectId,

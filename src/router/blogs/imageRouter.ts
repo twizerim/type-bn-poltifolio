@@ -7,5 +7,6 @@ import { ImageController } from "../../controller/blogcontroller/imagecontroller
 const router:Router=express.Router()
 router.post("/post",upload.single("image"),ImageController.postImage)
 router.get("/get",ImageController.getImages)
+router.delete("/delete",ImageController.deletemages)
 
 export default router

@@ -9,4 +9,5 @@ const imagecontroller_1 = require("../../controller/blogcontroller/imagecontroll
 const router = express_1.default.Router();
 router.post("/post", imagemulter_1.default.single("image"), imagecontroller_1.ImageController.postImage);
 router.get("/get", imagecontroller_1.ImageController.getImages);
+router.delete("/delete", imagecontroller_1.ImageController.deletemages);
 exports.default = router;

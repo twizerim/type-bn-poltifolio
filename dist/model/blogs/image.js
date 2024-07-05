@@ -7,7 +7,10 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const imagechema = new mongoose_1.default.Schema({
     id: { type: String },
     category: { type: String, required: true },
-    image: { type: String, required: true },
+    image: {
+        public_id: { type: String, required: true },
+        url: { type: String, required: true }
+    },
     comments: [
         {
             type: mongoose_1.default.Schema.Types.ObjectId,

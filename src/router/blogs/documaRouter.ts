@@ -6,7 +6,7 @@ import { DocumentController } from "../../controller/blogcontroller/documacontro
 
 const router:Router=express.Router()
 router.post("/post",uploaddocuma,DocumentController.postdocuma)
-// router.get("/get",DocumentController.getdocuma)
-// router.delete("/delete",DocumentController.deletdocuma)
+router.get("/get",DocumentController.getdocuma)
+router.delete("/delete",DocumentController.deletdocuma)
 
 export default router

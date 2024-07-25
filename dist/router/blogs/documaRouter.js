@@ -8,6 +8,6 @@ const foldersmulter_1 = __importDefault(require("../../validater/blogs/foldersmu
 const documacontroller_1 = require("../../controller/blogcontroller/documacontroller");
 const router = express_1.default.Router();
 router.post("/post", foldersmulter_1.default, documacontroller_1.DocumentController.postdocuma);
-// router.get("/get",DocumentController.getdocuma)
-// router.delete("/delete",DocumentController.deletdocuma)
+router.get("/get", documacontroller_1.DocumentController.getdocuma);
+router.delete("/delete", documacontroller_1.DocumentController.deletdocuma);
 exports.default = router;

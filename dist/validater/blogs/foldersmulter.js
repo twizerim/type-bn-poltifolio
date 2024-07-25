@@ -12,12 +12,14 @@ const storage = multer_1.default.diskStorage({
     },
 });
 const fileFilter = (req, file, cb) => {
-    if (file.mimetype.startsWith('documa/')) {
+    if (file.mimetype === 'application/pdf' ||
+        file.mimetype === 'application/msword' ||
+        file.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
         cb(null, true);
     }
     else {
-        cb(new Error('Not an document! Please upload an document.'), false);
+        cb(new Error('Not a document! Please upload a valid document.'), false);
     }
 };
-const uploaddocuma = (0, multer_1.default)({ storage, fileFilter });
-exports.default = uploaddocuma;
+const uploadDocument = (0, multer_1.default)({ storage, fileFilter }).single('document');
+exports.default = uploadDocument;

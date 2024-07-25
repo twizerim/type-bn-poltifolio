@@ -1,7 +1,5 @@
-
 import multer from 'multer';
 import path from 'path';
-
 
 const storage = multer.diskStorage({
   destination: 'uploads/', 
@@ -10,15 +8,18 @@ const storage = multer.diskStorage({
   },
 });
 
-
 const fileFilter = (req: Express.Request, file: Express.Multer.File, cb: any) => {
-  if (file.mimetype.startsWith('documa/')) {
+  if (
+    file.mimetype === 'application/pdf' ||
+    file.mimetype === 'application/msword' ||
+    file.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+  ) {
     cb(null, true);
   } else {
-    cb(new Error('Not an document! Please upload an document.'), false);
+    cb(new Error('Not a document! Please upload a valid document.'), false);
   }
 };
 
-const uploaddocuma = multer({ storage,fileFilter });
+const uploadDocument = multer({ storage, fileFilter }).single('document');
 
-export default uploaddocuma;
+export default uploadDocument;

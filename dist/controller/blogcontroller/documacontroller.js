@@ -23,28 +23,30 @@ class DocumentController {
             var _a;
             try {
                 const { category } = req.body;
-                const document = ((_a = req.file) === null || _a === void 0 ? void 0 : _a.path) || "";
+                const documentPath = ((_a = req.file) === null || _a === void 0 ? void 0 : _a.path) || "";
                 if (!req.file) {
                     return (0, errormessage_1.errormessage)(res, 404, 'Please upload your document');
                 }
+                const result = yield cloudinary_1.default.uploader.upload(documentPath, {
+                    folder: 'Documents'
+                });
+                const newdocuma = yield folders_1.default.create({
+                    category: category.toString(),
+                    document: {
+                        public_id: result.public_id,
+                        url: result.secure_url,
+                    }
+                });
+                if (!newdocuma) {
+                    return (0, errormessage_1.errormessage)(res, 404, 'No document posted');
+                }
                 else {
-                    const result = yield cloudinary_1.default.uploader.upload(req.file.path, {
-                        folder: 'Documents'
-                    });
-                    const newdocuma = yield folders_1.default.create({ document: {
-                            public_id: result.public_id,
-                            url: result.secure_url,
-                        }, category });
-                    if (!newdocuma) {
-                        return (0, errormessage_1.errormessage)(res, 404, 'No document posted');
-                    }
-                    else {
-                        return (0, successmessage_1.successmessage)(res, 201, 'document successfuly posted', newdocuma);
-                    }
+                    return (0, successmessage_1.successmessage)(res, 201, 'Document successfully posted', newdocuma);
                 }
             }
             catch (error) {
                 console.log(error);
+                return (0, errormessage_1.errormessage)(res, 500, 'An error occurred');
             }
         });
     }
@@ -52,10 +54,10 @@ class DocumentController {
         return __awaiter(this, void 0, void 0, function* () {
             const documa = yield folders_1.default.find();
             if (!documa) {
-                return (0, errormessage_1.errormessage)(res, 401, 'no document found');
+                return (0, errormessage_1.errormessage)(res, 401, 'No document found');
             }
             else {
-                return (0, successmessage_1.successmessage)(res, 201, 'all documents retrived', documa);
+                return (0, successmessage_1.successmessage)(res, 201, 'All documents retrieved', documa);
             }
         });
     }
@@ -63,10 +65,10 @@ class DocumentController {
         return __awaiter(this, void 0, void 0, function* () {
             const documa = yield folders_1.default.deleteMany();
             if (!documa) {
-                return (0, errormessage_1.errormessage)(res, 401, 'no document found');
+                return (0, errormessage_1.errormessage)(res, 401, 'No document found');
             }
             else {
-                return (0, successmessage_1.successmessage)(res, 201, 'all documents deleted', documa);
+                return (0, successmessage_1.successmessage)(res, 201, 'All documents deleted', documa);
             }
         });
     }

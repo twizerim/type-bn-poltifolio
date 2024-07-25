@@ -23,7 +23,7 @@ class DocumentController {
             var _a;
             try {
                 const { category } = req.body;
-                const documa = ((_a = req.file) === null || _a === void 0 ? void 0 : _a.path) || "";
+                const document = ((_a = req.file) === null || _a === void 0 ? void 0 : _a.path) || "";
                 if (!req.file) {
                     return (0, errormessage_1.errormessage)(res, 404, 'Please upload your document');
                 }
@@ -31,7 +31,7 @@ class DocumentController {
                     const result = yield cloudinary_1.default.uploader.upload(req.file.path, {
                         folder: 'Documents'
                     });
-                    const newdocuma = yield folders_1.default.create({ documa: {
+                    const newdocuma = yield folders_1.default.create({ document: {
                             public_id: result.public_id,
                             url: result.secure_url,
                         }, category });

@@ -12,8 +12,7 @@ class DocumentController{
 
         try {
             const { category}: Folder = req.body;
-            const documa = req.file?.path || ""
-
+            const document = req.file?.path || ""
             if(!req.file){
                 return errormessage(res,404,'Please upload your document')
             }else{
@@ -21,7 +20,7 @@ class DocumentController{
                     folder:'Documents'
                 })
 
-                const newdocuma = await Folders.create({documa:{
+                const newdocuma = await Folders.create({document:{
                     public_id: result.public_id,
                     url: result.secure_url,
                 },category})

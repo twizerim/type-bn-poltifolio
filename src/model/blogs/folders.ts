@@ -1,0 +1,25 @@
+
+import mongoose,{Schema,PopulatedDoc,Document} from "mongoose";
+
+
+export interface Folder extends Document {
+    id:string;
+    category:string;
+    documa: {
+        public_id: string;
+        url: string;
+    };
+  }
+
+
+const folderchema = new mongoose.Schema({
+    id:{type:String},
+    category:{type:String,required:true},
+    image: {
+        public_id: { type: String, required: true },
+        url: { type: String, required: true }
+    },
+    
+    postAt:{type:Date,default:new Date(Date.now())}
+})
+export default mongoose.model<Folder>('Folders', folderchema);
